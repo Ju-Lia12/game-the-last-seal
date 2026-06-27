@@ -8,7 +8,7 @@ class Menu:
         self.surf = pygame.image.load('./asset/img_menu.png') #Carregando a imagem background do Menu
         self.rect = self.surf.get_rect() #Cordenadas da imagem background
 
-    def run(self, ):
+    def run(self):
         #Carregando música do Menu
         pygame.mixer_music.load('./asset/menu.mp3')
         pygame.mixer_music.play(-1) #Tocando a musica do Menu
@@ -16,20 +16,20 @@ class Menu:
             self.window.blit(source = self.surf, dest = self.rect) #Desenhando a imagem background Menu na tela
             mouse_pos = pygame.mouse.get_pos() #Detectando a posição do mouse para fazer a seleção no Menu
             #Criando e confugurando o Menu
-            self.menu_text(90,'The Last Seal', (255,202,202), (500,260))
-            rect_new_game = self.menu_text(45,'New Game', (255,202,202), (500,500))
-            rect_coop = self.menu_text(45,'New Game - Cooperative', (255,202,202), (500,550))
-            rect_score = self.menu_text(45,'Score', (255,202,202), (500,600))
-            rect_exit = self.menu_text(45,'Exit', (255,202,202), (500,650))
+            self.menu_text(100,'The Last Seal', (255,202,202), (960,350))
+            rect_new_game = self.menu_text(50,'New Game', (255,202,202), (960,600))
+            rect_coop = self.menu_text(50,'New Game - Cooperative', (255,202,202), (960,650))
+            rect_score = self.menu_text(50,'Score', (255,202,202), (960,700))
+            rect_exit = self.menu_text(50,'Exit', (255,202,202), (960,750))
             #Mudando a cor do texto quando o mouse passa por ele
             if rect_new_game.collidepoint(mouse_pos):
-                self.menu_text(45,'New Game', (255,155,155), (500,500))
+                self.menu_text(50,'New Game', (255,155,155), (960,600))
             if rect_coop.collidepoint(mouse_pos):
-                self.menu_text(45,'New Game - Cooperative', (255,155,155), (500,550))
+                self.menu_text(50,'New Game - Cooperative', (255,155,155), (960,650))
             if rect_score.collidepoint(mouse_pos):
-                self.menu_text(45,'Score', (255,155,155), (500,600))
+                self.menu_text(50,'Score', (255,155,155), (960,700))
             if rect_exit.collidepoint(mouse_pos):
-                self.menu_text(45,'Exit', (255,155,155), (500,650))
+                self.menu_text(50,'Exit', (255,155,155), (960,750))
             #Criando lista para usar como botões
             botoes = [rect_new_game, rect_coop, rect_score, rect_exit]
 
@@ -42,11 +42,11 @@ class Menu:
                     for indice, botoes in enumerate(botoes):
                         if botoes.collidepoint(mouse_pos):
                             if indice == 0:
-                                pass
+                                return 'New_Game'
                             if indice == 1:
-                                pass
+                                return 'Cooperative'
                             if indice == 2:
-                                pass
+                                return 'Score'
                             if indice == 3:
                                 pygame.quit()
                                 quit()
@@ -59,7 +59,7 @@ class Menu:
 
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_position: tuple):
-        text_font: Font = pygame.font.SysFont (name = "Jacquard12-Regular", size = text_size)
+        text_font: Font = pygame.font.SysFont (name = "FantasyRPGtitleRegular", size = text_size)
         text_surf: Surface = text_font.render (text, False, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(center = text_position)
         self.window.blit(source = text_surf, dest = text_rect)
