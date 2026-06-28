@@ -2,17 +2,19 @@ import pygame
 from pygame.font import Font
 from pygame import Rect, Surface
 
+#TODO: remover linhas de teste player
+from code.player import Player
+
 
 class Level:
     def __init__(self, window, name, game_mode):
         self.window = window
         self.name = name
         self.game_mode = game_mode
-        #self.entity_list = botoes
+        #self.entity_list: list[Entity] = []
         
         #Configurando visuais do Level
         self.surf = pygame.image.load('./asset/battlebackground1.png') #Carregando a imagem background
-        self.surf = pygame.transform.scale(self.surf, (1920, 1080))
         self.rect = self.surf.get_rect() #Cordenadas da imagem background
         self.settings1 = pygame.image.load('./asset/settings1.png') #Carreagndo icon de settings
         self.settings1 = pygame.transform.scale(self.settings1, (100, 100)) #Redimensionando tamanho do icon
@@ -22,6 +24,9 @@ class Level:
         self.mini_menu = pygame.transform.scale(self.mini_menu, (800, 850))
         self.mini_menu_rect = self.mini_menu.get_rect(center = (960, 540))
 
+        #TODO: remover linhas de teste player
+        self.player = Player('walk', (400,600)) 
+
     def run(self, ):
         #Carregando música do level
         pygame.mixer_music.load('./asset/battle1.mp3')
@@ -29,7 +34,10 @@ class Level:
         while True:
             self.window.blit(source = self.surf, dest = self.rect) #Desenhando a imagem background do level
             self.window.blit(source = self.settings1, dest = self.settings1_rect) #Desenhando o icon 
-             
+            # TODO: remover linhas de teste player
+            self.player.move()
+            self.window.blit(source = self.player.surf, dest = self.player.rect)
+
             pygame.display.flip() #Exibindo configurações na tela 
 
             #Configurando o mini menu
