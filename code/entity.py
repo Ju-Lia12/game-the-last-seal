@@ -2,6 +2,7 @@ import pygame
 from abc import ABC, abstractmethod
 
 
+# Classe mãe
 class Entity(ABC):
     def __init__(self, name: str, position: tuple):
         # super().__init__()
