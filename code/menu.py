@@ -11,6 +11,14 @@ class Menu:
         )  # Carregando a imagem background do Menu
         self.rect = self.surf.get_rect()  # Cordenadas da imagem background
 
+        # Definindo imagens de controle
+        self.key_w = pygame.image.load("./asset/W.png")
+        self.key_a = pygame.image.load("./asset/A.png")
+        self.key_s = pygame.image.load("./asset/S.png")
+        self.key_d = pygame.image.load("./asset/D.png")
+        self.key_space = pygame.image.load("./asset/SPACE.png")
+        self.key_space = pygame.transform.scale(self.key_space, (95, 25))
+
     def run(self):
         # Carregando música do Menu
         pygame.mixer_music.load("./asset/menu.mp3")
@@ -19,6 +27,16 @@ class Menu:
             self.window.blit(
                 source=self.surf, dest=self.rect
             )  # Desenhando a imagem background Menu na tela
+
+            # Desenhando imagens de controle
+            self.menu_text(20, "MOVIMENTOS", (255, 255, 255), (150, 1000))
+            self.window.blit(self.key_w, (130, 915))
+            self.window.blit(self.key_a, (90, 950))
+            self.window.blit(self.key_s, (130, 950))
+            self.window.blit(self.key_d, (170, 950))
+            self.menu_text(20, "ATAQUE", (255, 255, 255), (300, 1000))
+            self.window.blit(self.key_space, (250, 960))
+
             mouse_pos = (
                 pygame.mouse.get_pos()
             )  # Detectando a posição do mouse para fazer a seleção no Menu
